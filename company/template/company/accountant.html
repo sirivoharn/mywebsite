@@ -1,0 +1,45 @@
+{% extends 'company/base.html' %}
+{% block title %} accountant  {% endblock title %}
+
+
+{% block content %}
+<center>
+    <h1> ฝ่ายปัญชี   </h1>
+
+    <p>
+	    ติดต่อกลับ ลูกค้า
+    </p>
+</center>
+
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ลำดับ</th>
+        <th scope="col">หัวข้อ</th>
+        <th scope="col">อีเมล์</th>
+        <th scope="col">รายละเอียด</th>
+        <th scope="col">ดำเนินการแล้ว</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for ct in contact %}
+      <tr>
+        
+        <th scope="row">{{forloop.counter0}}</th>
+        
+            <td> <a href="{% url 'action-page' ct.id %}">{{ct.title}} </a> </td> <!-- http://localhost:8000/action-detial/3 -->
+            <td>{{ct.email}}</td>
+            <td>{{ct.detail}}</td>
+            {% if ct.complete == False %}
+                <td> <i class="fa fa fa-times" style="font-size:24px;color:red;"></i> </td>
+            {% else %}
+                <td> <i class="fa fa fa-check" style="font-size:24px;color:green;"></i> </td>
+            {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}
+

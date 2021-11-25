@@ -1,0 +1,32 @@
+{% extends 'company/base.html' %}
+{% block title %} ติดต่อเรา  {% endblock title %}
+
+
+{% block content %}
+<center><h1> ติดต่อเรา   </h1> </center>
+
+	{% if message %}
+		<h3>{{ message }}</h3>
+
+	{% else %}
+	<form method ="POST">
+		{% csrf_token %}
+    	<div class="form-group">
+      		<label for="title">หัวข้อที่ต้องการ:</label>
+      		<input type="text" class="form-control" id="title" name="title">
+    	</div>	<br>
+    	<div class="form-group">
+    		<label for="email">อีเมล์ติดต่อ:</label>
+      		<input type="text" class="form-control" id="email" name="email">
+    	</div>	<br>
+    	<div class="form-group">
+  			<label for="comment">รายละเอียด:</label>
+  			<textarea class="form-control" rows="5" id="detail" name="detail"></textarea>
+		</div> 	<br>
+    	<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+	{% endif %}
+
+
+{% endblock content %}

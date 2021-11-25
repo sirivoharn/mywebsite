@@ -1,0 +1,18 @@
+{% extends 'company/base.html' %} {% block title %} reset password {% endblock title %} 
+
+{% block content %}
+    <center>
+        <h1> ยืนยันสมาชิคสำเร็จ</h1> <br>
+    </center>
+
+    {% if error %}
+        <h3>{{ error }}</h3>
+    {% else %}
+        <center>
+        
+           ยินดีตอนรับ ขณะนี้ระบบพร้อมใช้งาน
+            
+        
+        </center>
+    {% endif %} 
+{% endblock content %}

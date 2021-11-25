@@ -1,0 +1,40 @@
+{% extends 'company/base.html' %}
+{% block title %} action  {% endblock title %}
+
+
+{% block content %}
+
+<center>
+	<h1>รายละเอียดการดำเนินการ</h1> <br>
+
+</center>
+
+<div class="container">
+	<h3>หัวข้อ : {{contact.title}}
+		{% if contact.complete == False %}
+			<td> <i class="fa fa fa-times" style="font-size:24px;color:red;"></i> </td>
+		{% else %}
+			<td> <i class="fa fa fa-check" style="font-size:24px;color:green;"></i> </td>
+		{% endif %}
+	</h3>
+
+	<p>
+		อีเมล์  : {{contact.email}} <br>
+		รายละเอียด : {{contact.detail}}<br>
+	</p>
+	<hr>
+	<form method ="POST">
+		{% csrf_token %}
+
+		<div class="form-group">
+  			<label for="comment">ดำเนินการโดย:</label>
+  			<textarea class="form-control" rows="5" id="detail" name="detail">{{action.actiondetail}}</textarea>
+		</div> 	<br>
+		<button type="submit" class="btn btn-primary" name = save> บันทีกข้อมูล</button> &nbsp;&nbsp;
+		<button type="submit" class="btn btn-danger" name = delete>ลบรายการ</button> &nbsp;&nbsp;
+		<button type="submit" class="btn btn-success" name = complete>ดำเนินการแล้ว</button> &nbsp;&nbsp;
+	</form>
+
+</div>
+
+{% endblock content %}

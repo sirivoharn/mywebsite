@@ -1,0 +1,70 @@
+{% extends 'company/base.html' %} {% block title %} โปรไฟล์ {% endblock title %} 
+
+{% block content %}
+	<center>
+		<h1>  My profile </h1>
+		{% if user.profile.verified == False %}
+			<p>	(กรุณายืนยันอีเมล์ เพื่อใช้งานและ comment)	</p>
+		{% endif %}
+	</center>
+	<!--ตรวจสอบ password2 -->
+	{% if warning %}
+		<div class="alert alert-warning" role="alert">
+			<p>{{warning}}</p>
+		</div>
+	{% endif %}
+
+	{% if message %}
+		<h3>{{ message }}</h3>
+	{% else %}
+		<form method="POST">
+			{% csrf_token %}
+
+			<div class="form-group">
+				<label for="fullname">ชื่อ-สกุล:</label>
+				<input type="text" class="form-control" id="fullname" name="fullname" value="{{profile.user.first_name}}" >
+			</div> <br>
+			<div class="form-group">
+				<label for="mobile">โทรศัพท์มือถือ:</label>
+				<input type="text" class="form-control" id="mobile" name="mobile" value="{{profile.mobile}}" >
+			</div> <br>
+
+			<div class="form-group">
+			<label for="username">Email:</label>
+			<input type="email" class="form-control" id="username" name="username" value="{{profile.user.email}}" required>
+			</div> <br>
+
+			<h3>คุณมี point :  {{profile.point}} </h3>
+   
+            <div class="form-check form-group">
+                <label>กรุณาเลือกสินค้าที่ชอบ </label> <br>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  เสี่ยวหมี่
+                </label>
+            </div>
+            <div class="form-check ">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  ไอโฟน
+                </label>
+            </div> <hr>
+              
+            <div class="form-check">
+                <label>ต้องการรับข้อมูลข่าวสารหรือไม่? </label> <br>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  ต้องการ
+            </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  ไม่ต้องการ
+                </label>
+            </div> <br>
+
+			<button type="submit" class="btn btn-primary">แก้ไขโปรไฟล์</button>
+		</form>
+	{% endif %} 
+{% endblock content %}

@@ -1,0 +1,81 @@
+{% extends 'company/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+    
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+
+      {% if user.profile.usertype == 'vip' %}
+        <h1 class="display-4 fw-normal">โปรโมชั่นพิเศษสำหรับ วีไอพี เมมเบอร์ เท่านั้น!!!</h1>
+        <p class="fs-5 text-muted">ตอนนี้ iphone มาใหม่ ล่าสุด หากซื้อวันนี้มีส่วนลดทันที่ 50 %</p>
+      
+      {% elif user.profile.usertype == 'vvip' %}
+        <h1 class="display-4 fw-normal">โปรโมชั่นพิเศษสำหรับ วีวีไอพี เมมเบอร์ เท่านั้น!!!</h1>
+        <p class="fs-5 text-muted">ตอนนี้ iphone มาใหม่ ล่าสุด หากซื้อวันนี้มีส่วนลดทันที่ 70 %</p>
+
+      {% elif user.profile.usertype == 'member' %}
+        <h1 class="display-4 fw-normal">โปรโมชั่นพิเศษสำหรับ เมมเบอร์ เท่านั้น!!!</h1>
+        <p class="fs-5 text-muted">ตอนนี้ iphone มาใหม่ ล่าสุด หากซื้อวันนี้มีส่วนลดทันที่ 30 %</p>
+    
+      {% else %}
+        <h1 class="display-4 fw-normal">โปรโมชั่นพิเศษ</h1>
+        <p class="fs-5 text-muted">ตอนนี้ iphone มาใหม่ ล่าสุด หากซื้อวันนี้มีส่วนลดทันที่ 20 %</p>
+      {% endif %}
+
+    </div>
+
+    {% comment %}
+
+    <center>
+      <img src="{% static '/image/notes21.jpg' %}" alt="My image">
+      {% for pd in allproduct %}
+          <h1> {{pd.title}}</h1>
+
+          {% if pd.picture %}
+            <img src="{{pd.picture.url}}" width="300">
+          {% endif %}
+          <p>
+              รายละเอียด {{pd.description}} <br>
+              {% if pd.specfile %}
+                ไฟล์สเปค : <a href="{{pd.specfile.url}}">Download</a> <br>
+              {% endif %}
+              ราคา  {{pd.price}} บาท <br>
+              เหลือในสต๊อก {{pd.quantity}} เครื่อง <br>
+          </p>
+      {% endfor %}
+
+    </center>
+
+    {% endcomment %}
+
+    {% for row in allrow %} 
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+        {% for c in row %}
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              {% if c.picture %}
+                <img class="card-img-top" src="{{c.picture.url}}" width="300" height="300">
+              {% else %}
+              <img class="card-img-top" src="{% static 'image/default_phone1.png' %}" width="300" height="300">
+              {% endif %}
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">{{c.title}}</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{c.price}}<small class="text-muted fw-light">/mo</small></h1>
+                
+                <button type="button" class="w-100 btn btn-lg btn-outline-primary">สั่งซื้อ</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+{% endblock content %}
+
+  

@@ -1,0 +1,52 @@
+{% extends 'company/base.html' %} {% block title %} ลงทะเบียน {% endblock title %} 
+
+{% block content %}
+	<center>
+		<h1> สมัครสมาชิก  </h1>
+	</center>
+	<!--ตรวจสอบ password2 -->
+	{% if warning %}
+		<div class="alert alert-warning" role="alert">
+			<p>{{warning}}</p>
+		</div>
+	{% endif %}
+
+	{% if message %}
+		<h3>{{ message }}</h3>
+	{% else %}
+		<form method="POST">
+			{% csrf_token %}
+			{% if fullname %}
+			<div class="form-group">
+				<label for="fullname">ชื่อ-สกุล:</label>
+				<input type="text" class="form-control" id="fullname" name="fullname" value="{{fullname}}" required>
+			</div> <br>
+			{% else %}
+			<div class="form-group">
+				<label for="fullname">ชื่อ-สกุล:</label>
+				<input type="text" class="form-control" id="fullname" name="fullname" required>
+			</div> <br>
+			{% endif %}
+			<div class="form-group">
+				<label for="mobile">โทรศัพท์มือถือ:</label>
+				<input type="text" class="form-control" id="mobile" name="mobile" value="{{mobile}}" >
+			</div> <br>
+
+			<div class="form-group">
+			<label for="username">Email:</label>
+			<input type="email" class="form-control" id="username" name="username" required>
+			</div> <br>
+
+			<div class="form-group">
+				<label for="password">รหัสผ่าน:</label>
+				<input type="password" class="form-control" id="password" name="password" required>
+			</div> <br>
+
+			<div class="form-group">
+				<label for="password2">Password:</label>
+				<input type="password" class="form-control" id="password2" name="password2" required>
+				</div> <br>
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+	{% endif %} 
+{% endblock content %}

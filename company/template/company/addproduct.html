@@ -1,0 +1,58 @@
+{% extends 'company/base.html' %} {% block title %} ลงทะเบียน {% endblock title %} 
+
+{% block content %}
+	<center>
+		<h1> เพิ่มรายการสินค้า  </h1>
+	</center>
+
+	{% if warning %}
+		<div class="alert alert-warning" role="alert">
+			<p>{{warning}}</p>
+		</div>
+	{% endif %}
+
+	{% if message %}
+		<h3>{{ message }}</h3>
+	{% else %}
+		<form method="POST" enctype="multipart/form-data"> 
+			{% csrf_token %}
+
+			<div class="form-group">
+				<label for="title">ชื่อสินค้า:</label>
+				<input type="text" class="form-control" id="title" name="title" placeholder="กรอกชื่อสินค้า" required>
+			</div> <br>
+            
+            <div class="form-group">
+                <label for="description">รายละเอียดสินค้า:</label>
+                <textarea class="form-control" id="description" name="description" rows="5" placeholder="กรอกรายละเอียด"></textarea>
+            </div> <br>
+
+            <div class="form-group">
+				<label for="price">ราคาสินค้า:</label>
+				<input type="text" class="form-control" id="price" name="price" >
+			</div> <br>
+
+            <div class="form-group">
+				<label for="quantity">จำนวน:</label>
+				<input type="text" class="form-control" id="quantity" name="quantity" value="1">
+			</div> <br>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" value="instock" id="instock" name="instock">
+                <label class="form-check-label" for="instock">มีของไหม</label>
+            </div><br>
+            
+            <div class="form-group">
+                <label for="picture">รูปภาพสินค้า</label>
+                <input type="file" class="form-control-file" id="picture" name="picture">
+            </div> <br>
+
+            <div class="form-group">
+                <label for="specfile">ไฟล์ที่เกี่ยวข้อง</label>
+                <input type="file" class="form-control-file" id="specfile" name="specfile">
+            </div><br>
+              
+			<button type="submit" class="btn btn-primary">เพิ่มสินค้า</button>
+		</form>
+	{% endif %} 
+{% endblock content %}
