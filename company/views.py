@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from .models import *
 # ระบบส่งไลน์
 from songline import Sendline
-# ระบบส่งเมล์ #
+# ระบบส่งเมล์ 
 from .emailsystem import sendthai
 
 from django.contrib.auth import authenticate, login
