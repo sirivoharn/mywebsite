@@ -1,4 +1,5 @@
 from django.contrib import auth
+from django.core import paginator
 from django.shortcuts import redirect, render
 
 from django.http import HttpResponse
@@ -15,6 +16,7 @@ from django.contrib.auth.decorators import login_required # เข้าถึ�
 
 from django.core.files.storage import FileSystemStorage
 
+from django.core.paginator import Paginator 
 
 #def Home(request):
 #	return HttpResponse('<h1>Hello World!</h1> <br> <p> by Company</p>')
@@ -39,6 +41,14 @@ def Login(request):
 
 def Home(request):
 	allproduct = Product.objects.all()
+
+	#paginator
+	product_per_page = 3 # How many product per page
+	paginator = Paginator(allproduct, product_per_page)
+	page = request.GET.get('page')  # localhost:8000/?page=2
+	allproduct = paginator.get_page(page)
+	print('COUNTI', len(allproduct))
+
 	context = {'allproduct':allproduct}
 	# แยกแถวละ 3 card เพื่อทำ pagination
 	allrow = []
